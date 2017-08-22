@@ -1,57 +1,35 @@
 <template lang="html">
   <div class="brand_config">
-    <div class="brand_addForm">
-      <el-card class="addform_wrap">
-        <el-form :model="formData" :rules="rules" ref="brandForm" :inline="true">
-          <el-form-item label="logo上传">
-            <el-upload
-              class="logo_upload"
-              :show-file-list="false"
-              :auto-upload="false"
-              ref="brandLogoUpload"
-              action="http://192.168.0.184/e-api/"
-              :on-change="selectImage"
-              :before-upload="beforeLogoUpload"
-              >
-              <img v-if="logoUrl" :src="logoUrl" class="logo_image">
-              <i v-else class="el-icon-plus logo_upload_icon"></i>
-            </el-upload>
-          </el-form-item>
-          <el-form-item prop="name" label="名称">
-            <el-input v-model="formData.name"></el-input>
-          </el-form-item>
-          <el-form-item prop="tel" label="联系方式">
-            <el-input v-model="formData.tel"></el-input>
-          </el-form-item>
-          <el-form-item prop="address" label="地址">
-            <el-input v-model="formData.address" @keyup.enter.native="handleAdd"></el-input>
-          </el-form-item>
-          <el-button type="primary" @click="handleAdd">添加品牌</el-button>
-        </el-form>
-      </el-card>
-    </div>
+    <el-button type="primary" icon="plus" @click="addBrand">新增</el-button>
     <div class="brand_list">
-      <el-table :data="brandList">
-        <el-table-column prop="name" label="名称" align="center"></el-table-column>
-        <el-table-column prop="tel" label="联系方式" align="center"></el-table-column>
-        <el-table-column prop="address" label="地址" align="center"></el-table-column>
-        <el-table-column label="操作" align="center">
-          <template scope="scope">
-            <el-button-group>
-              <el-button type="primary" icon="edit" @click="showEditForm(scope.row)"></el-button>
-              <el-button type="primary" icon="delete" @click="handleDelete(scope.row)"></el-button>
-            </el-button-group>
-          </template>
-        </el-table-column>
-      </el-table>
+
     </div>
 
 
     <!-- dialog -->
 
     <!-- edit dialog -->
+    <el-dialog :visible.sync="addVisible" title="新增品牌" size="small">
+      <el-form label-width="80px" :model="formData" :rules="rules" ref="brandForm">
+        <el-form-item label="公司全称" prop="name">
+          <el-input v-model="formData.name"></el-input>
+        </el-form-item>
+        <el-form-item label="品牌名称" prop="brand">
+          <el-input v-model="formData.brand"></el-input>
+        </el-form-item>
+        <el-form-item label="品牌类型" prop="type">
+          <el-input v-model="formData.type"></el-input>
+        </el-form-item>
+        <el-form-item label="品牌图标">
 
-    <el-dialog :visible.sync="editVisible" title="编辑" size="small">
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleAdd">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- <el-dialog :visible.sync="editVisible" title="编辑" size="small">
       <el-form label-width="80px" :model="editRow" :rules="rules" ref="brandForm">
         <el-form-item prop="name" label="名称">
           <el-input v-model="editRow.name"></el-input>
@@ -67,7 +45,7 @@
         <el-button @click="editVisible = false">取 消</el-button>
         <el-button type="primary" @click="handleEdit">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -76,21 +54,22 @@ export default {
   data () {
     return {
       brandList: [],  //  替换成state数据
+      addVisible: false,
       logoUrl: '',
       formData: {
-        tel: '',
         name: '',
-        address: ''
+        brand: '',
+        type: ''
       },
       rules: {
         name: [
-          { required: true, message: '请输入名称', trigger: 'blur' }
+          { required: true, message: '请输入公司全称', trigger: 'blur' }
         ],
-        tel: [
-          { required: true, message: '请输入联系方式', trigger: 'blur' },
+        brand: [
+          { required: true, message: '请输入品牌名称', trigger: 'blur' },
         ],
-        address: [
-          { required: true, message: '请输入地址', trigger: 'blur' },
+        type: [
+          { required: true, message: '请输入品牌类型', trigger: 'blur' },
         ]
       },
       editVisible: false,
@@ -98,6 +77,9 @@ export default {
     }
   },
   methods: {
+    addBrand () {
+      this.addVisible = true
+    },
     selectImage (file, fileList) {
       this.logoUrl = URL.createObjectURL(file.raw)
       console.log(fileList)

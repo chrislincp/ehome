@@ -18,20 +18,19 @@ Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  to.path == '/login' ? store.dispatch('LogOut') : ''
+  // to.path == '/login' ? store.dispatch('LogOut') : ''
 
-  // let routes = router.options.routes
-  if (!getToken() && to.path != '/login') {
-    next({ path: '/login' })
-    NProgress.done()
-  } else {
-    if (!store.getters.user.ID) {
-      store.dispatch('GetInfo')
-    }else {
-
-    }
+  // if (!getToken() && to.path != '/login') {
+  //   next({ path: '/login' })
+  //   NProgress.done()
+  // } else {
+  //   if (!store.getters.user.ID) {
+  //     store.dispatch('GetInfo')
+  //   }else {
+  //
+  //   }
     next()
-  }
+  // }
 })
 
 router.afterEach(() => {

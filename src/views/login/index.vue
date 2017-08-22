@@ -87,32 +87,34 @@ export default {
     loginSubmit() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.logining = true;
-          let [username, password] = [
-            this.loginForm.username,
-            this.isToken ? this.loginForm.password : md5(this.loginForm.password)
-          ]
-          let loginParams = { username, password };
-          this.UserLogin(loginParams).then(() => {
-            this.logining = false
-            const data = this.status
-            console.log(data)
-            if (data.code != 200) {
-              this.$message({
-                message: data.msg,
-                type: 'error'
-              });
-            }else {
-              this.$message({
-                message: data.msg,
-                type: 'success'
-              })
-              this.checked ?
-              localStorage.setItem('remember', data.remember)
-              :localStorage.removeItem('remember')
-              this.$router.push({ path: '/home' });
-            }
-          })
+          console.log('login success')
+          // this.logining = true;
+          // let [username, password] = [
+          //   this.loginForm.username,
+          //   this.isToken ? this.loginForm.password : md5(this.loginForm.password)
+          // ]
+          // let loginParams = { username, password };
+          // this.UserLogin(loginParams).then(() => {
+          //   this.logining = false
+          //   const data = this.status
+          //   console.log(data)
+          //   if (data.code != 200) {
+          //     this.$message({
+          //       message: data.msg,
+          //       type: 'error'
+          //     });
+          //   }else {
+          //     this.$message({
+          //       message: data.msg,
+          //       type: 'success'
+          //     })
+          //     this.checked ?
+          //     localStorage.setItem('remember', data.remember)
+          //     :localStorage.removeItem('remember')
+          //     this.$router.push({ path: '/home' });
+          //   }
+          // })
+          this.$router.push({ path: '/home' });
         } else return false;
       });
     },
@@ -121,7 +123,7 @@ export default {
     ])
   },
   mounted () {
-    let token = localStorage.getItem('remember')
+    const token = localStorage.getItem('remember')
     if (token) {
       const [username, password] = [window.atob(token.split('#')[0]), token.split('#')[1]]
       this.loginForm = { username, password }

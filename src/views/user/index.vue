@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="user_container">
-    {{user.id}}
+    <iframe src="http://192.168.0.193/aa/" width="100%" height="100%"></iframe>
   </div>
 </template>
 
@@ -13,10 +13,17 @@ export default {
     ])
   },
   mounted () {
-    console.log(this.user)
+    setTimeout(() => {
+      console.log(this.user)
+    }, 1000)
   }
 }
 </script>
 
 <style lang="css">
+  .user_container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
 </style>

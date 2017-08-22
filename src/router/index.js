@@ -8,6 +8,8 @@ import User from '@/views/user'   //  个人中心
 // 系统设置
 import Config from '@/views/system/config'
 
+// 产品
+import * as Pro from '@/views/products'
 
 Vue.use(Router)
 
@@ -36,6 +38,17 @@ const router = new Router({
       noDropdown: true,
       children: [
         {path: 'user', component: User}
+      ]
+    },
+    {
+      path: '/products',
+      name: '产品',
+      component: Layout,
+      icon: 'fa fa-cubes',
+      redirect: '/products/list',
+      children: [
+        {path: 'list', component: Pro.ProList, name: '产品库'},
+        {path: 'add', component: Pro.ProAdd, name: '产品添加'}
       ]
     },
     {
