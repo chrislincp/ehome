@@ -8,7 +8,7 @@
 
     <!-- dialog -->
 
-    <!-- edit dialog -->
+    <!-- add dialog -->
     <el-dialog :visible.sync="addVisible" title="新增品牌" size="small">
       <el-form label-width="80px" :model="formData" :rules="rules" ref="brandForm">
         <el-form-item label="公司全称" prop="name">
@@ -21,7 +21,16 @@
           <el-input v-model="formData.type"></el-input>
         </el-form-item>
         <el-form-item label="品牌图标">
-
+          <el-upload
+            class="logo_uploader"
+            action="test.php"
+            :show-file-list="true"
+            list-type="picture-card"
+            :auto-upload="false"
+            ref="brandLogoUpload"
+            >
+            <i class="el-icon-plus logo-uploader-icon" v-show=""></i>
+          </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -29,23 +38,8 @@
         <el-button type="primary" @click="handleAdd">确 定</el-button>
       </span>
     </el-dialog>
-    <!-- <el-dialog :visible.sync="editVisible" title="编辑" size="small">
-      <el-form label-width="80px" :model="editRow" :rules="rules" ref="brandForm">
-        <el-form-item prop="name" label="名称">
-          <el-input v-model="editRow.name"></el-input>
-        </el-form-item>
-        <el-form-item prop="tel" label="联系方式">
-          <el-input v-model="editRow.tel"></el-input>
-        </el-form-item>
-        <el-form-item prop="address" label="地址">
-          <el-input v-model="editRow.address"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="editVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleEdit">确 定</el-button>
-      </span>
-    </el-dialog> -->
+    <!-- edit dialog -->
+
   </div>
 </template>
 
@@ -55,7 +49,6 @@ export default {
     return {
       brandList: [],  //  替换成state数据
       addVisible: false,
-      logoUrl: '',
       formData: {
         name: '',
         brand: '',
@@ -78,41 +71,18 @@ export default {
   },
   methods: {
     addBrand () {
+      this.formData = {
+        name: '',
+        brand: '',
+        type: ''
+      }
       this.addVisible = true
-    },
-    selectImage (file, fileList) {
-      this.logoUrl = URL.createObjectURL(file.raw)
-      console.log(fileList)
-    },
-    beforeLogoUpload (file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
     },
     handleAdd () {
       this.$refs.brandForm.validate((valid) => {
         if (valid) {
-          if (this.logoUrl) {
-            this.$refs.brandLogoUpload.submit()
-          }
-          // 伪代码
-          this.brandList.push(this.formData)
-          this.formData = {
-            logo: '',
-            tel: '',
-            name: '',
-            address: ''
-          }
-          this.logoUrl = ''
-          // add brand code...
-
-
+          // submit request
+          this.addVisible = false
 
         } else {
           return false
@@ -169,42 +139,26 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$refs)
+    console.log(this.$refs.brandLogoUpload)
   }
 }
 </script>
 
 <style lang="scss">
   .brand_config {
-    .brand_addForm {
-      .addform_wrap {
-        margin-bottom: 10px;
-        .logo_upload {
-          .el-upload {
-            border: 1px dashed #d9d9d9;
-            border-radius: 6px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            &.el-upload:hover {
-               border-color: #20a0ff;
-            }
-            .logo_image {
-              width: 178px;
-              height: 178px;
-              display: block;
-            }
-            .logo_upload_icon {
-              font-size: 28px;
-              color: #8c939d;
-              width: 178px;
-              height: 178px;
-              line-height: 178px;
-              text-align: center;
-            }
-          }
-        }
+    .logo_uploader {
+
+      .logo-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
       }
+    }
+    .logo_uploader:hover {
+       border-color: #20a0ff;
     }
   }
 </style>
