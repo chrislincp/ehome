@@ -10,10 +10,8 @@ const config = {
     }
   },
   actions: {
-    GetStructureData ({ commit, state }) {
-      const params = { type: 1, fc: 1, UserID: 42, Visibility: 1 }
+    GetStructureData ({ commit, state }, params) {
       return getStructureData(params).then(res => {
-        console.log(res.data)
         commit('STRUCTURE_DATA', res.data)
       })
     },
