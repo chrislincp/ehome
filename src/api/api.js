@@ -22,3 +22,21 @@ export const postStructureData = params => {
   return axios.post(`${base}/goods/all.php`, qs.stringify(params))
   .then(res => res.data)
 }
+
+export const getBrands = params => {
+  return axios.get(`${base}/goods/all.php?fc=7`, { params })
+}
+
+export const getBrandsType = params => {
+  return axios.get(`${base}/goods/all.php?fc=6`, { params })
+}
+
+export const brandSubmit = params => {
+  return axios.post(`${base}/goods/all.php`, qs.stringify(params))
+  .then(res => res.data)
+}
+
+export const deleteBrand = params => {
+  return axios.post(`${base}/goods/all.php`, qs.stringify(params))
+  .then(res => res.data)
+}
