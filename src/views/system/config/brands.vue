@@ -106,6 +106,11 @@ export default {
       },
     }
   },
+  watch: {
+    editRow: function (val, oldVal) {
+      // console.log(val, oldVal)
+    }
+  },
   computed: {
     ...mapGetters([
       'brands',
@@ -149,7 +154,7 @@ export default {
             typeID: data.type.join(';'),
           }
           data.ID ? this.logoUploadData.ID = data.ID : ''
-          if (data.logoUrl) {
+          if (this.$refs.brandLogoUpload.uploadFiles.length != 0) {
             setTimeout(() => {
               this.$refs.brandLogoUpload.submit()
             }, 100)
