@@ -40,3 +40,15 @@ export const deleteBrand = params => {
   return axios.post(`${base}/goods/all.php`, qs.stringify(params))
   .then(res => res.data)
 }
+
+export const getProductData = params => {
+  return axios.get(`${base}/goods/all.php?fc=15`, { params })
+}
+
+export const getProductsFilter = params => {
+  return axios.get(`${base}/goods/all.php?fc=16`, { params })
+}
+export const productFormPost = params => {
+  return axios.post(`${base}/goods/all.php`, qs.stringify(params))
+  .then(res => res.data)
+}

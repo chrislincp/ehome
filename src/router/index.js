@@ -48,7 +48,7 @@ const router = new Router({
       redirect: '/products/list',
       children: [
         {path: 'list', component: Pro.ProList, name: '产品库'},
-        {path: 'add', component: Pro.ProAdd, name: '产品添加'}
+        {path: 'add', component: Pro.ProAdd, name: '产品管理'}
       ]
     },
     {
