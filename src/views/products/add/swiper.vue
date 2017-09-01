@@ -188,7 +188,7 @@ export default {
     .content {
       .swiper_list {
         width: 100%;
-        height: 148px;
+        min-height: 200px;
         // overflow: hidden;
         // overflow-x: auto;
         // margin: 10px 0;
