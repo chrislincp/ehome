@@ -200,8 +200,8 @@ export default {
           // padding-bottom: 100%;
           margin: 0.7%;
           // padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
+          // border: 1px solid #ccc;
+          // border-radius: 5px;
           position: relative;
           .image_item {
             width: 100%;
@@ -211,6 +211,7 @@ export default {
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100%;
+            border-radius: 5px;
           }
           .close_file {
             position: absolute;
