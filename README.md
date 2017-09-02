@@ -1,4 +1,4 @@
-# vuex
+# Ehome ERP
 
 > A Vue.js project
 
