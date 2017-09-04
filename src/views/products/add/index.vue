@@ -69,8 +69,31 @@ export default {
       this.$store.commit('SET_LOADING')
       this.SetProductStep(0)
       setTimeout(() => {
-        this.GetProductData(this.search).then(() => {
-          this.searched = true
+        this.GetProductData(this.search).then(res => {
+          const { code, msg, body } = res.data
+          if (code == 200) {
+            this.$store.commit('SET_PRODUCT_DATA', { data: body, visible: false })
+            this.searched = true
+          }else if (code == 199) {
+            const formData = {
+              ET: '',
+              exhibit: '0',
+              state: '0',
+              style: '',
+              brand: '',
+              pic: [],
+              shop: [],
+              tag: [],
+              type: []
+            }
+            this.$store.commit('SET_PRODUCT_DATA', { data: formData, visible: true })
+            this.searched = true
+          }else {
+            this.$message({
+              type: 'error',
+              message: '查询失败'
+            })
+          }
           this.$store.commit('SET_LOADING')
         })
       }, 1000)

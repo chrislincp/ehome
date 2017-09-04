@@ -43,25 +43,7 @@ const products = {
       })
     },
     GetProductData ({ commit }, params) {
-      return getProductData(params).then(res => {
-        const data = res.data
-        if (data.code == 200) {
-          commit('SET_PRODUCT_DATA', {data: data.body, visible: false})
-        }else if (data.code == 199) {
-          const formData = {
-            ET: '',
-            exhibit: '0',
-            state: '0',
-            style: '',
-            brand: '',
-            pic: [],
-            shop: [],
-            tag: [],
-            type: []
-          }
-          commit('SET_PRODUCT_DATA', {data: formData, visible: true})
-        }
-      })
+      return getProductData(params)
     },
     SetProductStep ({ commit }, params) {
       commit('SET_STEP', params)
