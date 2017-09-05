@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="product_swiper">
     <header class="swiper_head">
-      <h1>轮播图</h1>
+      <h1 style="color: #324157">轮播图</h1>
     </header>
     <div class="content">
       <el-card class="swiper_list" :body-style="{padding: '5px'}">
@@ -169,7 +169,7 @@ export default {
               this.$refs.productSwiperUpload.clearFiles()
               this.swiperLoading = false
               this.uploadVisible = false
-            }          
+            }
           })
         }
         this.fileIndex = 0
