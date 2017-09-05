@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="add_products" v-loading.fullscreen.lock="fullscreenLoading">
     <header class="model_search">
-      <el-form :inline="true" :model="search" label-width="60px">
+      <el-form :inline="true" :model="search" label-width="40px" label-positon="left">
         <el-form-item label="型号">
           <el-input
             placeholder="请输入型号"
@@ -121,7 +121,7 @@ export default {
 
 <style lang="scss">
   .add_products {
-    padding: 10px;
+    padding: 10px 15px;
     .model_search {
       .success_icon {
         color: #13CE66;

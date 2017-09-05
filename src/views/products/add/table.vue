@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="product_table">
     <header class="table_head">
-      <h1>列表</h1>
+      <h1 style="color: #324157">列表</h1>
     </header>
     <div class="table_content">
       <el-table :data="productData.shop">

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="product_form">
-    <el-form label-width="60px">
+    <el-form label-width="40px" label-position="left">
       <el-form-item label="类型">
         <el-cascader
           v-model="productData.type"
