@@ -158,14 +158,18 @@ export default {
         const { code, msg } = res
         if (code == 200) {
           let model = { model: this.model }
-          this.GetProductData(model).then(() => {
-            this.$message({
-              type: 'success',
-              message: msg
-            })
-            this.$refs.productSwiperUpload.clearFiles()
-            this.swiperLoading = false
-            this.uploadVisible = false
+          this.GetProductData(model).then(res => {
+            const { code, msg, body } = res.data
+            if (code == 200) {
+              this.$store.commit('SET_PRODUCT_DATA', { data: body, visible: false })
+              this.$message({
+                type: 'success',
+                message: msg
+              })
+              this.$refs.productSwiperUpload.clearFiles()
+              this.swiperLoading = false
+              this.uploadVisible = false
+            }          
           })
         }
         this.fileIndex = 0
